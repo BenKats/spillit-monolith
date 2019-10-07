@@ -51,6 +51,7 @@ public class UserServiceImpl implements UserService {
     public User getUser(String username) {
         return userRepository.findByUsername(username);
     }
+//------------------------------|     Endpoints     |----------------------------------------
 
     @Override
     public String createUser(User newUser){
@@ -72,4 +73,10 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
+    @Override
+    public List<User> listUsers() {
+        return userRepository.findAll();
+    }
+
 }
