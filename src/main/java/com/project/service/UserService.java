@@ -9,4 +9,6 @@ public interface UserService  extends UserDetailsService {
     public User getUser(String username);
 
     public String createUser(User newUser);
+
+    public String login(User returningUser);
 }

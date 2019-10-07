@@ -19,4 +19,9 @@ public class UserController {
         return ResponseEntity.ok(new JwtResponse(userService.createUser(newUser)));
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody User returningUser) {
+        return ResponseEntity.ok(new JwtResponse(userService.login(returningUser)));
+    }
+
 }
