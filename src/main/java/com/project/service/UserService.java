@@ -4,6 +4,7 @@ package com.project.service;
 import com.project.model.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+
 import java.util.List;
 
 public interface UserService  extends UserDetailsService {
@@ -15,4 +16,6 @@ public interface UserService  extends UserDetailsService {
     public String login(User returningUser);
 
     public List<User> listUsers();
+
+    public User getUserInfo(String username);
 }
