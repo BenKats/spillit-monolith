@@ -22,8 +22,13 @@ public class PostController {
     }
 
     @GetMapping("/list-posts-of/{username}")
-    public List<Post> listPosts(@PathVariable String username){
-        return postService.listPosts(username);
+    public List<Post> listPostsOfUser(@PathVariable String username){
+        return postService.listPostsOfUser(username);
+    }
+
+    @GetMapping("/list-all-posts")
+    public List<Post> listAllPosts(){
+        return postService.listAllPosts();
     }
 
     @DeleteMapping("/post/delete/{postId}")
