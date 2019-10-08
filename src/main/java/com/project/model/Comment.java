@@ -1,6 +1,8 @@
 package com.project.model;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -20,6 +22,7 @@ public class Comment {
     //Might have to change the cascade type if we get issues
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "post_id", nullable = false)
+    @JsonBackReference
     private Post post;
 
     public Comment() {
