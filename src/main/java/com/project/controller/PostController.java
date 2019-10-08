@@ -16,14 +16,14 @@ public class PostController {
     @Autowired
     PostService postService;
 
-    @PostMapping("/post")
-    public Post createPost (@RequestBody Post newPost){
-        return postService.createPost(newPost);
+    @PostMapping("/post/{username}")
+    public Post createPost (@RequestBody Post newPost, @PathVariable String username){
+        return postService.createPost(newPost, username);
     }
 
-    @GetMapping("/list-all-posts")
-    public List<Post> listPosts(){
-        return postService.listPosts();
+    @GetMapping("/list-posts-of/{username}")
+    public List<Post> listPosts(@PathVariable String username){
+        return postService.listPosts(username);
     }
 
     @DeleteMapping("/post/delete/{postId}")

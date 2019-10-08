@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface PostService {
 
-    Post createPost(Post newPost);
+    Post createPost(Post newPost, String username);
 
-    List<Post> listPosts();
+    List<Post> listPosts(String username);
 
     HttpStatus deleteById(Long postId);
 }
