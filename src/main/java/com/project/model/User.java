@@ -1,6 +1,6 @@
 package com.project.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 
@@ -31,8 +31,8 @@ public class User {
         this.username = username;
     }
 
-    //JSON Ignore on getPassword to not display the encrypted password on request output
-    @JsonIgnore
+    //JSON Property on getPassword to not display the encrypted password on request output
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public String getPassword() {
         return password;
     }
