@@ -1,5 +1,7 @@
 package com.project.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -29,6 +31,8 @@ public class User {
         this.username = username;
     }
 
+    //JSON Ignore on getPassword to not display the encrypted password on request output
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
