@@ -10,6 +10,10 @@ public interface CommentService {
 
     public List<Comment> listCommentsOfUser(String username);
 
+    public List<Comment>listCommentsOfPost(Long postId);
+
+    public List<Comment> listAllComments();
+
     public HttpStatus deleteComment(Long commentId);
 
 }

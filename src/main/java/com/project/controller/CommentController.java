@@ -18,13 +18,24 @@ public class CommentController {
         return commentService.createComment(newComment, postId, username);
     }
 
+    @GetMapping("/comment/list/byuser/{username}")
+    public List<Comment> listCommentsOfUser(@PathVariable String username){
+        return commentService.listCommentsOfUser(username);
+    }
+
+    @GetMapping("/comment/list/bypost/{postId}")
+    public List<Comment> listCommentsOfPost(@PathVariable Long postId){
+        return commentService.listCommentsOfPost(postId);
+    }
+
+    @GetMapping("/comment/list")
+    public List<Comment> listAllComments(){
+        return commentService.listAllComments();
+    }
+
     @DeleteMapping("/comment/delete/{commentId}")
     public HttpStatus deleteComment(@PathVariable Long commentId){
         return commentService.deleteComment(commentId);
     }
 
-    @GetMapping("/comment/list/{username}")
-    public List<Comment>listCommentsOfUser(@PathVariable String username){
-        return commentService.listCommentsOfUser(username);
-    }
 }
