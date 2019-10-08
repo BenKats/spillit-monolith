@@ -7,11 +7,12 @@ import java.util.List;
 
 public interface PostService {
 
-    Post createPost(Post newPost, String username);
+   public Post createPost(Post newPost, String username);
 
-    List<Post> listPosts(String username);
+   public List<Post> listPostsOfUser(String username);
 
-    HttpStatus deleteById(Long postId);
+   public List<Post> listAllPosts();
 
-    public Iterable<Post> listAllPosts();
+   public HttpStatus deleteById(Long postId);
+
 }
