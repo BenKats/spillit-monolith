@@ -11,6 +11,10 @@ public class User {
     private String username;
     private String password;
 
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "userProfile_id")
+    private UserProfile userProfile;
+
     public User() {}
 
     public Long getId() {
@@ -36,4 +40,5 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }
