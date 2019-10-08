@@ -1,5 +1,6 @@
 package com.project.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ public class User {
 
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "userProfile_id")
+    @JsonBackReference
     private UserProfile userProfile;
 
     public User() {}
@@ -45,4 +47,11 @@ public class User {
         this.password = password;
     }
 
+    public UserProfile getUserProfile() {
+        return userProfile;
+    }
+
+    public void setUserProfile(UserProfile userProfile) {
+        this.userProfile = userProfile;
+    }
 }

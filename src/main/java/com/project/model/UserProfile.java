@@ -1,5 +1,7 @@
 package com.project.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,6 +16,8 @@ public class UserProfile {
     private String mobile;
 
     @OneToOne(mappedBy = "userProfile", cascade = {CascadeType.ALL})
+    @JsonManagedReference
+
     public User user;
 
     public UserProfile(){}
