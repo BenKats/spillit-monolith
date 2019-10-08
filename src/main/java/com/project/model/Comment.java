@@ -12,6 +12,16 @@ public class Comment {
 
     private String description;
 
+    //Might have to change the cascade type if we get issues
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    //Might have to change the cascade type if we get issues
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "post_id", nullable = false)
+    private Post post;
+
     public Comment() {
     }
 
@@ -29,5 +39,21 @@ public class Comment {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
     }
 }
