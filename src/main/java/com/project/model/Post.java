@@ -1,6 +1,9 @@
 package com.project.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "posts")
@@ -18,13 +21,9 @@ public class Post {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "post", orphanRemoval = true)
+    @JsonManagedReference
+    private List<Comment> comments;
 
 
     public Post() {
@@ -54,5 +53,19 @@ public class Post {
         this.description = description;
     }
 
+    public User getUser() {
+        return user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 }
