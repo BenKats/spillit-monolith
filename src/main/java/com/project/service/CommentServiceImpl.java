@@ -40,6 +40,17 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    public List<Comment> listCommentsOfPost(Long postId) {
+        Post post = postRepository.findPostById(postId);
+        return commentRepository.findCommentsByPost(post);
+    }
+
+    @Override
+    public List<Comment> listAllComments() {
+        return commentRepository.findAll();
+    }
+
+    @Override
     public HttpStatus deleteComment(Long commentId) {
         commentRepository.deleteById(commentId);
         return HttpStatus.valueOf(200);
