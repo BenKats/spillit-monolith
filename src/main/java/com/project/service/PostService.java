@@ -9,7 +9,7 @@ public interface PostService {
 
     Post createPost(Post newPost, String username);
 
-    List<Post> listPosts();
+    List<Post> listPosts(String username);
 
     HttpStatus deleteById(Long postId);
 }
