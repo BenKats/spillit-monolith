@@ -26,6 +26,11 @@ public class PostController {
         return postService.listPosts(username);
     }
 
+    @GetMapping("/list-all-posts")
+    public Iterable<Post> listAllPosts(){
+        return postService.listAllPosts();
+    }
+
     @DeleteMapping("/post/delete/{postId}")
     public HttpStatus deletePostById (@PathVariable Long postId){
         return postService.deleteById(postId);

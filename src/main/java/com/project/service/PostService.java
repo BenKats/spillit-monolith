@@ -12,4 +12,6 @@ public interface PostService {
     List<Post> listPosts(String username);
 
     HttpStatus deleteById(Long postId);
+
+    public Iterable<Post> listAllPosts();
 }

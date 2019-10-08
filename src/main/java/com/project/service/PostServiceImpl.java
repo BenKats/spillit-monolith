@@ -38,5 +38,10 @@ public class PostServiceImpl implements PostService {
         return HttpStatus.OK;
     }
 
+    @Override
+    public Iterable<Post> listAllPosts(){
+      return postRepository.findAll();
+    }
+
 }
 
