@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CommentServiceImpl implements CommentService {
     @Autowired
@@ -29,6 +31,12 @@ public class CommentServiceImpl implements CommentService {
         newComment.setUser(user);
         newComment.setPost(post);
         return commentRepository.save(newComment);
+    }
+
+    @Override
+    public List<Comment> listCommentsOfUser(String username) {
+        User user = userRepository.findByUsername(username);
+        return commentRepository.findCommentsByUser(user);
     }
 
     @Override
