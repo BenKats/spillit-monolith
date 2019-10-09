@@ -1,5 +1,6 @@
 package com.project.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -15,10 +16,11 @@ public class UserProfile {
     private String email;
     private String mobile;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "userProfile", cascade = {CascadeType.ALL})
     @JsonManagedReference
 
-    public User user;
+    private User user;
 
     public UserProfile(){}
 
