@@ -3,10 +3,7 @@ package com.project.controller;
 import com.project.model.UserProfile;
 import com.project.service.UserProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserProfileController {
@@ -18,4 +15,17 @@ public class UserProfileController {
     public UserProfile createUserProfile(@PathVariable String username, @RequestBody UserProfile newUserProfile) {
         return userProfileService.createUserProfile(username, newUserProfile);
     }
+
+
+    @GetMapping("/profile/{username}")
+    public UserProfile getUserProfile(@PathVariable String username){
+        return userProfileService.getUserProfile(username);
+    }
+
+
+
+
+
+
 }
+
