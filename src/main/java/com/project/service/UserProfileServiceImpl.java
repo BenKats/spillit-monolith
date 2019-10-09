@@ -27,6 +27,19 @@ public class UserProfileServiceImpl implements UserProfileService{
     }
 
     @Override
+    public UserProfile updateUserProfile(String username, UserProfile updatedUserProfile){
+        User user = userRepository.findByUsername(username);
+        UserProfile userProfile = user.getUserProfile();
+        if(updatedUserProfile.getEmail() != null){
+            userProfile.setEmail(updatedUserProfile.getEmail());
+        }
+        if(updatedUserProfile.getMobile() != null){
+            userProfile.setMobile(updatedUserProfile.getMobile());
+        }
+        return userProfileRepository.save(userProfile);
+
+    }
+    @Override
     public UserProfile getUserProfile(String username){
         User user = userRepository.findByUsername(username);
         return user.getUserProfile();
