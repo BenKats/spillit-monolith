@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface PostService {
 
-   public Post createPost(Post newPost, String username);
+   public Post createPost(Post newPost);
 
    public List<Post> listPostsOfUser(String username);
 
