@@ -7,7 +7,7 @@ public interface UserProfileService {
 
     public UserProfile updateUserProfile(String username, UserProfile updatedUserProfile);
 
-    public UserProfile getUserProfile(String username);
+    public UserProfile getUserProfileOfUser(String username);
 
-
+    public UserProfile getUserProfile();
 }
