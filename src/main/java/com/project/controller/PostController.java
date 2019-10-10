@@ -5,6 +5,7 @@ import com.project.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -38,8 +39,14 @@ public class PostController {
 
     @DeleteMapping("/delete/{postId}")
     public HttpStatus deletePostById (@PathVariable Long postId){
-        return postService.deleteById(postId);
-    }
+        try{
+            return postService.deleteById(postId);
+        }
+        catch (Exception exc){
+            throw new ResponseStatusException(
+                    HttpStatus.UNAUTHORIZED, "Attempt To Delete Other User's Post", exc);
+        }
 
+    }
 
 }

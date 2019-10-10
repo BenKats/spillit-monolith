@@ -12,7 +12,7 @@ public interface PostService {
 
    public List<Post> listAllPosts();
 
-   public HttpStatus deleteById(Long postId);
+   public HttpStatus deleteById(Long postId) throws Exception;
 
    List<Post> listPosts();
 }
