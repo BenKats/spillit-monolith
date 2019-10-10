@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -20,8 +22,8 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User returningUser) {
-        return ResponseEntity.ok(new JwtResponse(userService.login(returningUser)));
+    public ResponseEntity<?> login(@RequestBody User returningUser, HttpServletRequest request, HttpSession session) {
+        return ResponseEntity.ok(new JwtResponse(userService.login(returningUser, request, session)));
     }
 
     @GetMapping("/list-all-users")
