@@ -66,8 +66,14 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public HttpStatus deleteComment(Long commentId) {
-        commentRepository.deleteById(commentId);
-        return HttpStatus.valueOf(200);
+    public HttpStatus deleteComment(Long commentId) throws Exception {
+        Long commentUserId = commentRepository.findById(commentId).orElseThrow(NullPointerException::new).getUser().getId();
+        Authentication auth = authenticationImpl.getAuthentication();
+        Long userId = userRepository.findByUsername(auth.getName()).getId();
+        if (userId.equals(commentUserId)){
+            commentRepository.deleteById(commentId);
+            return HttpStatus.valueOf(200);
+        }
+        throw new IllegalAccessException();
     }
 }

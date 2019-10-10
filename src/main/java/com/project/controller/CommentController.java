@@ -5,6 +5,7 @@ import com.project.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -40,7 +41,17 @@ public class CommentController {
 
     @DeleteMapping("/comment/delete/{commentId}")
     public HttpStatus deleteComment(@PathVariable Long commentId){
-        return commentService.deleteComment(commentId);
+        try{
+            return commentService.deleteComment(commentId);
+        }
+        catch (NullPointerException exc){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Comment Not Found", exc);
+        } catch (Exception exc) {
+            throw new ResponseStatusException(
+            HttpStatus.UNAUTHORIZED, "Attempt To Delete Other User's Comment", exc);
+        }
+
     }
 
 }

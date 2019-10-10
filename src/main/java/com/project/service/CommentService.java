@@ -16,7 +16,7 @@ public interface CommentService {
 
     public List<Comment> listAllComments();
 
-    public HttpStatus deleteComment(Long commentId);
+    public HttpStatus deleteComment(Long commentId) throws Exception;
 
 
 }
