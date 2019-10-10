@@ -8,7 +8,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "UserProfile")
 public class UserProfile {
-
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,10 +18,10 @@ public class UserProfile {
     @JsonIgnore
     @OneToOne(mappedBy = "userProfile", cascade = {CascadeType.ALL})
     @JsonManagedReference
-
     private User user;
 
-    public UserProfile(){}
+
+    public UserProfile(){ }
 
     public Long getId(){
         return id;
@@ -49,7 +48,6 @@ public class UserProfile {
     }
 
     public Long getUserId(){
-
         return user.getId();
     }
 

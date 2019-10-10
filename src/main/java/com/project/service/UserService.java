@@ -1,9 +1,7 @@
 package com.project.service;
 
-
 import com.project.model.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
-
 
 import java.util.List;
 

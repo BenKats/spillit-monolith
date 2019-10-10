@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 import java.util.List;
 
 public interface PostService {
-
    public Post createPost(Post newPost);
 
    public List<Post> listPostsOfUser(String username);

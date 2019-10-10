@@ -7,15 +7,14 @@ import com.project.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class UserProfileServiceImpl implements UserProfileService{
-
     @Autowired
     UserProfileRepository userProfileRepository;
 
     @Autowired
     UserRepository userRepository;
+
 
     @Override
     public UserProfile createUserProfile(String username, UserProfile newUserProfile) {
@@ -45,7 +44,5 @@ public class UserProfileServiceImpl implements UserProfileService{
         return user.getUserProfile();
 
     }
-
-
 
 }

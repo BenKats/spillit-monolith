@@ -14,7 +14,6 @@ import java.util.List;
 
 @Service
 public class PostServiceImpl implements PostService {
-
     @Autowired
     PostRepository postRepository;
 
@@ -23,6 +22,7 @@ public class PostServiceImpl implements PostService {
 
     @Autowired
     AuthenticationImpl authenticationImpl;
+
 
     @Override
     public Post createPost(Post newPost){
@@ -48,7 +48,6 @@ public class PostServiceImpl implements PostService {
         postRepository.deleteById(postId);
         return HttpStatus.OK;
     }
-
 
 }
 

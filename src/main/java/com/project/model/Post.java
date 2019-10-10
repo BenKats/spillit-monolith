@@ -26,8 +26,7 @@ public class Post {
     private List<Comment> comments;
 
 
-    public Post() {
-    }
+    public Post() { }
 
     public Long getId() {
         return id;

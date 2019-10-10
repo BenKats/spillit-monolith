@@ -1,6 +1,5 @@
 package com.project.model;
 
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
@@ -25,8 +24,8 @@ public class Comment {
     @JsonBackReference
     private Post post;
 
-    public Comment() {
-    }
+
+    public Comment() { }
 
     public Long getId() {
         return id;

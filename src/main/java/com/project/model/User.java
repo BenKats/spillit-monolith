@@ -19,7 +19,8 @@ public class User {
     @JsonBackReference
     private UserProfile userProfile;
 
-    public User() {}
+
+    public User() { }
 
     public Long getId() {
         return id;
