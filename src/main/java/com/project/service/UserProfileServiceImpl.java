@@ -17,6 +17,15 @@ public class UserProfileServiceImpl implements UserProfileService{
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    public UserProfileServiceImpl(UserService userService, UserProfileRepository userProfileRepository) {
+        this.userService = userService;
+        this.userProfileRepository = userProfileRepository;
+    }
+
     @Override
     public UserProfile createUserProfile(String username, UserProfile newUserProfile) {
         User user = userRepository.findByUsername(username);
@@ -26,6 +35,19 @@ public class UserProfileServiceImpl implements UserProfileService{
         return user.getUserProfile();
     }
 
+    @Override
+    public UserProfile updateUserProfile(String username, UserProfile updatedUserProfile){
+        User user = userRepository.findByUsername(username);
+        UserProfile userProfile = user.getUserProfile();
+        if(updatedUserProfile.getEmail() != null){
+            userProfile.setEmail(updatedUserProfile.getEmail());
+        }
+        if(updatedUserProfile.getMobile() != null){
+            userProfile.setMobile(updatedUserProfile.getMobile());
+        }
+        return userProfileRepository.save(userProfile);
+
+    }
     @Override
     public UserProfile getUserProfile(String username){
         User user = userRepository.findByUsername(username);

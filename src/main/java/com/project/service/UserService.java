@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
+
 public interface UserService  extends UserDetailsService {
     //Might not need to declare getUser method here, might be enough to just define it in the implement
     public User getUser(String username);
