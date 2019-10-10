@@ -31,11 +31,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/**").permitAll()
-                .antMatchers().authenticated()
+                .antMatchers("/login", "/signup").permitAll()
                 .antMatchers("/user/blah").hasRole("USER")
+                .anyRequest().authenticated()
                 .and()
-                .httpBasic();
+                .httpBasic()
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/index.html")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID");
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }

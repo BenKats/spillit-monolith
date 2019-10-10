@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserProfileController {
-
     @Autowired
     UserProfileService userProfileService;
 
@@ -21,10 +20,14 @@ public class UserProfileController {
         return userProfileService.createUserProfile(username, newUserProfile);
     }
 
-
     @GetMapping("/profile/{username}")
-    public UserProfile getUserProfile(@PathVariable String username){
-        return userProfileService.getUserProfile(username);
+    public UserProfile getUserProfileOfUser(@PathVariable String username){
+        return userProfileService.getUserProfileOfUser(username);
+    }
+
+    @GetMapping("/profile")
+    public UserProfile getUserProfile(){
+        return userProfileService.getUserProfile();
     }
 
     @PutMapping("/update/{username}")

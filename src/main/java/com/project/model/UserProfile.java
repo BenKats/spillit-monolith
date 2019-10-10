@@ -8,21 +8,22 @@ import javax.persistence.*;
 @Entity
 @Table(name = "UserProfile")
 public class UserProfile {
-
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(unique = true)
     private String email;
     private String mobile;
 
     @JsonIgnore
     @OneToOne(mappedBy = "userProfile", cascade = {CascadeType.ALL})
     @JsonManagedReference
-
     private User user;
 
-    public UserProfile(){}
+
+    public UserProfile(){ }
 
     public Long getId(){
         return id;
@@ -49,7 +50,6 @@ public class UserProfile {
     }
 
     public Long getUserId(){
-
         return user.getId();
     }
 

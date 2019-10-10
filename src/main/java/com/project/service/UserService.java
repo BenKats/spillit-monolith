@@ -1,10 +1,10 @@
 package com.project.service;
 
-
 import com.project.model.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
@@ -14,9 +14,8 @@ public interface UserService  extends UserDetailsService {
 
     public String createUser(User newUser);
 
-    public String login(User returningUser);
+    public String login(User returningUser, HttpServletRequest request, HttpSession session);
 
     public List<User> listUsers();
 
-    public User getUserInfo(String username);
 }

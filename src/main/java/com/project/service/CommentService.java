@@ -6,7 +6,9 @@ import org.springframework.http.HttpStatus;
 import java.util.List;
 
 public interface CommentService {
-    public Comment createComment(Comment newComment, Long postId, String username);
+    public Comment createCommentForUser(Comment newComment, Long postId, String username);
+
+    public Comment createComment(Comment newComment, Long postId);
 
     public List<Comment> listCommentsOfUser(String username);
 
@@ -14,6 +16,7 @@ public interface CommentService {
 
     public List<Comment> listAllComments();
 
-    public HttpStatus deleteComment(Long commentId);
+    public HttpStatus deleteComment(Long commentId) throws Exception;
+
 
 }

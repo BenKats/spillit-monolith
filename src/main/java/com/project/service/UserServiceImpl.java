@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +32,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     @Qualifier("encoder")
     PasswordEncoder bCryptPasswordEncoder;
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -69,10 +72,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String login(User user){
+    public String login(User user, HttpServletRequest request, HttpSession session) {
         User returningUser = userRepository.findByUsername(user.getUsername());
         if(returningUser != null && bCryptPasswordEncoder.matches(user.getPassword(), returningUser.getPassword())){
             UserDetails userDetails = loadUserByUsername(returningUser.getUsername());
+            session.invalidate();
+            HttpSession newSession = request.getSession();
             return jwtUtil.generateToken(userDetails);
         }
         return null;
@@ -81,11 +86,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> listUsers() {
         return userRepository.findAll();
-    }
-
-    @Override
-    public User getUserInfo(String username) {
-        return userRepository.findByUsername(username);
     }
 
 }
