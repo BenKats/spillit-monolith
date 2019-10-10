@@ -14,8 +14,13 @@ public class CommentController {
     CommentService commentService;
 
     @PostMapping("/comment/{postId}/{username}")
-    public Comment createComment(@RequestBody Comment newComment, @PathVariable Long postId, @PathVariable String username){
-        return commentService.createComment(newComment, postId, username);
+    public Comment createCommentForUser(@RequestBody Comment newComment, @PathVariable Long postId, @PathVariable String username){
+        return commentService.createCommentForUser(newComment, postId, username);
+    }
+
+    @PostMapping("/comment/{postId}")
+    public Comment createComment(@RequestBody Comment newComment, @PathVariable Long postId){
+        return commentService.createComment(newComment, postId);
     }
 
     @GetMapping("/comment/list/byuser/{username}")

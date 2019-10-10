@@ -1,5 +1,6 @@
 package com.project.service;
 
+import com.project.config.AuthenticationFacade;
 import com.project.model.Comment;
 import com.project.model.Post;
 import com.project.model.User;
@@ -8,6 +9,7 @@ import com.project.repository.PostRepository;
 import com.project.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,10 +25,23 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     PostRepository postRepository;
 
+    @Autowired
+    AuthenticationFacade authenticationImpl;
+
 
     @Override
-    public Comment createComment(Comment newComment, Long postId, String username) {
+    public Comment createCommentForUser(Comment newComment, Long postId, String username) {
         User user = userRepository.findByUsername(username);
+        Post post = postRepository.findPostById(postId);
+        newComment.setUser(user);
+        newComment.setPost(post);
+        return commentRepository.save(newComment);
+    }
+
+    @Override
+    public Comment createComment(Comment newComment, Long postId) {
+        Authentication auth = authenticationImpl.getAuthentication();
+        User user = userRepository.findByUsername(auth.getName());
         Post post = postRepository.findPostById(postId);
         newComment.setUser(user);
         newComment.setPost(post);
