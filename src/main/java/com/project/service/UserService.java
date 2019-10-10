@@ -17,5 +17,4 @@ public interface UserService  extends UserDetailsService {
 
     public List<User> listUsers();
 
-    public User getUserInfo(String username);
 }

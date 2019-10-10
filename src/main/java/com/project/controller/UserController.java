@@ -30,8 +30,4 @@ public class UserController {
         return userService.listUsers();
     }
 
-    @GetMapping(value = "/{username}/info")
-    public User getUserInfo(@PathVariable String username){
-        return userService.getUserInfo(username);
-    }
 }
