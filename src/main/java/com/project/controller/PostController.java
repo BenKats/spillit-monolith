@@ -24,6 +24,11 @@ public class PostController {
         return postService.listPostsOfUser(username);
     }
 
+    @GetMapping("/post/list")
+    public List<Post> listPosts(){
+        return postService.listPosts();
+    }
+
     @GetMapping("/list-all-posts")
     public List<Post> listAllPosts(){
         return postService.listAllPosts();

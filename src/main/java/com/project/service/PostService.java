@@ -14,4 +14,5 @@ public interface PostService {
 
    public HttpStatus deleteById(Long postId);
 
+   List<Post> listPosts();
 }

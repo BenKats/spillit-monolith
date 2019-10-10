@@ -39,6 +39,13 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public List<Post> listPosts() {
+        Authentication auth = authenticationImpl.getAuthentication();
+        User user = userRepository.findByUsername(auth.getName());
+        return postRepository.findPostsByUser(user);
+    }
+
+    @Override
     public List<Post> listAllPosts() {
         return postRepository.findAll();
     }
