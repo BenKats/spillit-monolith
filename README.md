@@ -13,8 +13,8 @@ Fullstack is a fullstack application with a RESTful application connected to a f
 ### Technologies Used
 
 * [Spring] - Used for creating our backend API
-* [PostgreSQL] - Used for storing and retrieving data from our relational database
-* [HTML/CSS/Javascript] - Used to build the front-end of our application
+* PostgreSQ - Used for storing and retrieving data from our relational database
+* HTML/CSS/Javascript - Used to build the front-end of our application
 
 [Ramel Haines]: https://github.com/EngineerMel
 [Benjamin Kats]: https://github.com/BenKats
