@@ -14,12 +14,14 @@ public class Comment {
     private String description;
 
     //Might have to change the cascade type if we get issues
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.PERSIST,
+            CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     //Might have to change the cascade type if we get issues
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.PERSIST,
+            CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "post_id", nullable = false)
     @JsonBackReference
     private Post post;

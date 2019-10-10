@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -51,9 +52,18 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    @Transactional
     public HttpStatus deleteById(Long postId){
-        postRepository.deleteById(postId);
-        return HttpStatus.OK;
+        Authentication auth = authenticationImpl.getAuthentication();
+        Long userId = userRepository.findByUsername(auth.getName()).getId();
+        Long postUserId = postRepository.findPostById(postId).getUser().getId();
+        if (userId.equals(postUserId)){
+            postRepository.deleteById(postId);
+            return HttpStatus.OK;
+        }
+        return HttpStatus.FORBIDDEN;
+
+
     }
 
 }

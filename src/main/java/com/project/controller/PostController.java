@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/post")
 public class PostController {
 
     @Autowired
     PostService postService;
 
-    @PostMapping("/post")
+    @PostMapping
     public Post createPost (@RequestBody Post newPost){
         return postService.createPost(newPost);
     }
@@ -24,18 +25,18 @@ public class PostController {
         return postService.listPostsOfUser(username);
     }
 
-    @GetMapping("/post/list")
+    @GetMapping("/list")
     public List<Post> listPosts(){
         return postService.listPosts();
     }
 
-    @GetMapping("/list-all-posts")
+    @GetMapping("/list-all")
     public List<Post> listAllPosts(){
         return postService.listAllPosts();
     }
 
 
-    @DeleteMapping("/post/delete/{postId}")
+    @DeleteMapping("/delete/{postId}")
     public HttpStatus deletePostById (@PathVariable Long postId){
         return postService.deleteById(postId);
     }
