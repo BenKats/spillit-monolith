@@ -10,6 +10,11 @@ public class UserProfileController {
     @Autowired
     UserProfileService userProfileService;
 
+    @Autowired
+    public void setUserProfileService(UserProfileService userProfileService){
+        this.userProfileService = userProfileService;
+    }
+
     @PostMapping("/profile/{username}")
     public UserProfile createUserProfile(@PathVariable String username, @RequestBody UserProfile newUserProfile) {
         return userProfileService.createUserProfile(username, newUserProfile);

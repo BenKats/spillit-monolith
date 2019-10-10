@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -69,7 +70,7 @@ public class UserControllerTest {
     }
 
     //The parameters dont have to be the exact json method. Like technically we should be using username instead of name but here it matters that the type is correct, String
-    private static String createUserInJson(String username,String password){
+    private static String createUserInJson(String username, String password) {
         return "{\"username\": \"" + username + "\"," +
                 "\"password\": \"" + password + "\"}";
     }
