@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="./css/landingPage.css" />
+        <title>Spillit | Landing</title>
+    </head>
+
+    <body>
+      <div class="siteName">Spillit<img src="img/tea-icon.png"></div>
+        <div class="container">
+          <div class="row">
+            <div class="column">
+              <h1 class="signup-text">Sign Up</h1>
+            </div>
+            <div class="column">
+              <h1 class="login-text">Sign In</h1>
+            </div>
+          </div>
+            <form onSubmit="postData(event)" class="form-wrapper" id="signup" novalidate>
+                <div class="form-section">
+                    <label for="email">Email</label>
+                    <input
+                        placeholder="email@me.com"
+                        type="email"
+                        name="email"
+                        id="email"
+                        required
+                    />
+                </div>
+                <div class="form-section">
+                    <label for="password">Password</label>
+                    <input
+                        placeholder="Hunter2"
+                        type="password"
+                        name="password"
+                        id="password"
+                        maxlength="12"
+                        required
+                    />
+                </div>
+                <div class="form-section" id="user-form">
+                    <label for="username">Username</label>
+                    <input
+                        placeholder="John Smith"
+                        type="text"
+                        name="username"
+                        id="username"
+                        required
+                    />
+                </div>
+                <div class="form-section" id="altEmail-form">
+                    <label for="email">Alt Email</label>
+                    <input
+                        placeholder="alt.email@me.com"
+                        type="email"
+                        name="email"
+                        id="alt-email"
+                        required
+                    />
+                </div>
+                <div class="form-section" id="mobile-form">
+                    <label for="mobile">Mobile #:</label>
+                    <input placeholder="555-555-5555" type="mobile" name="mobile" id="mobile" />
+                </div>
+                <div class="form-section" id="url-form">
+                    <label for="url">Website:</label>
+                    <input placeholder="Spillit.com" type="url" name="url" id="url" />
+                </div>
+                <button type="submit" class="signup-bttn" id="submit-button">Sign Up</button>
+            </form>
+    <script src="./js/landingPage.js"></script>
+  </body>
+</html>

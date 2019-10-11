@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Spillit | Profile</title>
+        <link rel="stylesheet" href="./css/profile.css" />
+    </head>
+    <body>
+        <header class="header">
+            <nav class="nav">
+                <ul class="nav-items">
+                    <li class="nav-item"><a href="./feed.html">Home</a></li>
+                    <li class="nav-item"><a href="./profile.html">Profile</a></li>
+                    <li class="nav-item"><a href="./index.html">Sign Out</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="profile-container">
+            <img
+                src=""
+                alt="pizza
+            cat"
+            />
+            <div class="text-container">
+                <form
+                    onSubmit="updateProfile(event)"
+                    class="form-wrapper"
+                    id="update-profile"
+                    novalidate
+                >
+                    <div class="form-section" id="user-form">
+                        <label for="username">Username:</label>
+                        <input
+                            class="none input-form"
+                            placeholder="John Smith"
+                            type="text"
+                            name="username"
+                            id="username"
+                            readonly="readonly"
+                        />
+                        <p class="displayed-text" id="username-displayed">NOTHING</p>
+                    </div>
+                    <div class="form-section">
+                        <label for="alt-email">Other Email:</label>
+                        <input
+                            class="none input-form"
+                            placeholder="ALTemail@me.com"
+                            type="email"
+                            name="alt-email"
+                            id="alt-email"
+                        />
+                        <p class="displayed-text" id="alt-email-displayed">NOTHING</p>
+                    </div>
+                    <div class="form-section">
+                        <label for="mobile">Mobile #:</label>
+                        <input
+                            class="none input-form"
+                            placeholder="555-555-5555"
+                            type="mobile"
+                            name="mobile"
+                            id="mobile"
+                        />
+                        <p class="displayed-text" id="mobile-displayed">NOTHING</p>
+                    </div>
+                    <div class="form-section">
+                        <label for="url">Website:</label>
+                        <input
+                            class="none input-form"
+                            placeholder="Spillit.com"
+                            type="url"
+                            name="url"
+                            id="url"
+                        />
+                        <p class="displayed-text" id="url-displayed">NOTHING</p>
+                    </div>
+                    <button type="submit" class="edit" id="edit-button">Edit</button>
+                </form>
+            </div>
+        </section>
+
+        <footer class="footer">Coded by Ben and Janna 2019</footer>
+        <script src="./js/profile.js"></script>
+    </body>
+</html>
