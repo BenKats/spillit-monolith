@@ -30,9 +30,9 @@ public class UserProfileController {
         return userProfileService.getUserProfile();
     }
 
-    @PutMapping("/update/{username}")
-    public UserProfile updateUserProfile(@PathVariable String username, @RequestBody UserProfile updatedUserProfile){
-        return userProfileService.updateUserProfile(username, updatedUserProfile);
+    @PutMapping("/update")
+    public UserProfile updateUserProfile(@RequestBody UserProfile updatedUserProfile){
+        return userProfileService.updateUserProfile(updatedUserProfile);
     }
 
 }
