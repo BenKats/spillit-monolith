@@ -68,7 +68,7 @@ function callGetProfile(
     mobileDisplayed,
     urlDisplayed
 ) {
-    fetch('http://thesi.generalassemb.ly:8080/profile', {
+    fetch('http://localhost:8181/profile', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -101,22 +101,21 @@ function callGetProfile(
         });
 }
 
-function callCreateProfile(altEmail, mobile, url) {
+function callCreateProfile(email, mobile) {
     console.log(`You're in call create profile, token is ${token}`);
     console.log('localstorage contains:' + window.localStorage.getItem(token));
     if (token == null) {
         console.error('Can not create profile, token is null');
     }
-    fetch('http://thesi.generalassemb.ly:8080/profile', {
+    fetch('http://localhost:8181/profile/{username}', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             Authorization: 'Bearer ' + token
         },
         body: JSON.stringify({
-            additionalEmail: altEmail.value,
+            email: email.value,
             mobile: mobile.value,
-            address: url.value
         })
     })
         .then(res => {

@@ -90,7 +90,7 @@ function callCreateProfile(email, mobile) {
     if (token == null) {
         console.error('Can not create profile, token is null');
     }
-    fetch('http://localhost:8181/profile/{username}', {
+    fetch(`http://localhost:8181/profile/${username}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
