@@ -22,7 +22,7 @@ Fullstack is a fullstack application with a RESTful application connected to a f
 
 ## General Approach 
 
-We first reviewed the technical requirements, necessary deliverables and sketched a wireframe to achieve our project tasks. We reached a consensus that it was important to continousluy clarify our project goals throughout the week to ensure that our project work remained aligned with the initial premise. On Day 1, we listed the model we would need, their end points, and the relationship the tables would have to each other. We created a task list on Trello to visualize what we needed to do at stage of the process. Using the task list, we estimated the time it would take to acccomplish each task to prepare for unforeseen problems in our creative process. Below is a timeline of how we planned our project.
+We first reviewed the technical requirements, necessary deliverables and sketched a wireframe to achieve our project tasks. We reached a consensus that it was important to continousluy clarify our project goals throughout the week to ensure that our project work remained aligned with the initial premise. On Day 1, we listed the model we would need, their end points, and the relationship the tables would have to each other. First, we create a table for Users and UserProfiles where we would establish a one-to-one relationship. Furthermore, we created a Post and Comment tables in order for our users to have access to create, delete, and read their comments. We also added functionality to allow users to create and delete their own comments. We created a task list on Trello to visualize what we needed to do at stage of the process. Using the task list, we estimated the time it would take to acccomplish each task to prepare for unforeseen problems in our creative process. Below is a timeline of how we planned our project.
 
 
 | Day         | 1       | 2       | 3       | 4       | 5       | 6       | 7     |
@@ -38,6 +38,13 @@ We first reviewed the technical requirements, necessary deliverables and sketche
 
 
 ## Installation Instructions
+* Intellij - An IDE
+* PostgresSQL - used to create your database and tables
+* Tomcat - server used to run the application
+* Postman - An API environment to test your endpoints
+* Maven - a tool to build and manage the dependencies
+* Spring Boot - used bootstrap and maintain Java webapps
+
 
 ## User Stories
 * As a news reporter, I want to make an account to deliver news updates to the online community.
