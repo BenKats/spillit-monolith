@@ -33,14 +33,14 @@ We first reviewed the technical requirements, necessary deliverables and sketche
 
 
 ## Major Hurdles
-** Cross-origin resource sharing(CORS)
-** Testing UserService login functionality
+* Cross-origin resource sharing(CORS)
+* Testing UserService login functionality
 
 
 ## Installation Instructions
 
 ## User Stories
-** As a news reporter, I want to make an account to deliver news updates to the online community.
-** As a user interface designer, I want to see white boarding sessions from other designers to improve my skills.
-** As a user, I want to edit my contact details so I can keep up to date.
-** As a Business user, I can post information about my products so that potential customers can learn about my business. 
+* As a news reporter, I want to make an account to deliver news updates to the online community.
+* As a user interface designer, I want to see white boarding sessions from other designers to improve my skills.
+* As a user, I want to edit my contact details so I can keep up to date.
+* As a Business user, I can post information about my products so that potential customers can learn about my business. 
