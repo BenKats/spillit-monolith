@@ -10,7 +10,7 @@ callListPosts();
 
 // console.log(postArr);
 function callListPosts() {
-    fetch('http://thesi.generalassemb.ly:8080/post/list', {
+    fetch('http://localhost:8181/post/list-all', {
         method: 'GET'
     }) //Force break
         .then(res => {
@@ -36,7 +36,7 @@ function callListPosts() {
 
 function displayPosts(postArr) {
     let feedContainer = document.querySelector('.feed-container');
-    for (let i = 0; i < /*postArr.length*/ 10; i++) {
+    for (let i = 0; i < postArr.length; i++) {
         // console.log(postArr[i]);
         let newPost = document.createElement('div');
         let newTitleContainer = document.createElement('div');
@@ -74,7 +74,7 @@ function displayPosts(postArr) {
     createNewCommentField();
 }
 function displayComments(postArr) {
-    for (let i = 0; i < /*postArr.length*/ 10; i++) {
+    for (let i = 0; i < postArr.length; i++) {
         console.log(postArr[i]);
         let pid = postArr[i].id;
 
@@ -112,7 +112,7 @@ function displayComments(postArr) {
     }
 }
 function callGetCommentsByPostId(pid) {
-    fetch(`http://thesi.generalassemb.ly:8080/post/${pid}/comment`, {
+    fetch(`http://localhost:8181/comment/list/bypost/${pid}`, {
         method: 'GET'
     })
         .then(res => {
@@ -143,7 +143,7 @@ function deleteComment(e) {
 }
 
 function callDeleteComment(cid) {
-    fetch(`http://thesi.generalassemb.ly:8080/comment/${cid}`, {
+    fetch(`http://localhost:8181/comment/delete/${cid}`, {
         method: 'DELETE',
         headers: {
             Authorization: 'Bearer ' + token
