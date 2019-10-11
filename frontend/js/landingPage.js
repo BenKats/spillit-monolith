@@ -58,16 +58,18 @@ function newUser() {
     );
 }
 
-function callSignup(username, password, email, altEmail, mobile, url) {
-    fetch('http://thesi.generalassemb.ly:8080/signup', {
+function callSignup(username, password, email) {
+    fetch('http://localhost:8181/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             username: username,
             password: password,
-            email: email
+            userProfile:{
+  		      email: email
+          }
         })
-    })
+      }
         .then(res => {
             console.log(res);
             return res.json();
@@ -79,26 +81,24 @@ function callSignup(username, password, email, altEmail, mobile, url) {
             callCreateProfile(altEmail, mobile, url);
         })
         .catch(error => {
-            console.error(error);
-        });
-}
+              console.error(error);
+          }))
 
-function callCreateProfile(altEmail, mobile, url) {
+function callCreateProfile(email, mobile) {
     console.log(`You're in call create profile, token is ${token}`);
     console.log('localstorage contains:' + window.localStorage.getItem(token));
     if (token == null) {
         console.error('Can not create profile, token is null');
     }
-    fetch('http://thesi.generalassemb.ly:8080/profile', {
+    fetch('http://localhost:8181/profile/{username}', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             Authorization: 'Bearer ' + token
         },
         body: JSON.stringify({
-            additionalEmail: altEmail,
+            email: email,
             mobile: mobile,
-            address: url
         })
     })
         .then(res => {
@@ -126,7 +126,7 @@ function returningUser() {
     callLogin(email.value, password.value);
 }
 function callLogin(email, password) {
-    fetch('http://thesi.generalassemb.ly:8080/login', {
+    fetch('http://localhost:8181/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -154,4 +154,6 @@ function redirectHome() {
         window.localStorage.setItem('token', token);
         window.location.href = './feed.html';
     }
+}
+
 }
