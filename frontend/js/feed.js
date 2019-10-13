@@ -67,6 +67,9 @@ function displayPosts(postArr) {
         newDesc.innerText = postArr[i].description;
         newUser.innerText = `Username: ${postArr[i].user.username}`;
         newToggleComments.innerText = 'Toggle Comments';
+        console.log(
+            `post id iz ${pid} new title inner text is ${postArr[i].title} newDesc.innerText ${newDesc.innerText} `
+        );
 
         //check for comments by post id
         callGetCommentsByPostId(pid);
@@ -75,7 +78,7 @@ function displayPosts(postArr) {
 }
 function displayComments(postArr) {
     for (let i = 0; i < postArr.length; i++) {
-        console.log(postArr[i]);
+        console.log('Inside display Comments this is pid' + postArr[i].id);
         let pid = postArr[i].id;
 
         if (sessionStorage.getItem(pid) != null) {
@@ -101,7 +104,7 @@ function displayComments(postArr) {
                 newCommentContainer.setAttribute('cid', postComments[j].id);
                 newCommentContainer.classList.add('comment-container');
                 //Assign Text
-                newComment.innerText = postComments[j].text;
+                newComment.innerText = postComments[j].description;
                 newUser.innerText = `Username: ${postComments[j].user.username}`;
                 newDeleteBttn.innerText = 'Delete';
 
@@ -116,7 +119,7 @@ function callGetCommentsByPostId(pid) {
         method: 'GET'
     })
         .then(res => {
-            // console.log(res.status);
+            console.log(res.status);
             return res.json();
         })
         .then(res => {
@@ -223,7 +226,7 @@ function callCreatePost(e) {
     console.log(`${document.querySelector('.post-title-form').value}`);
     let title = document.querySelector('.post-title-form');
     let desc = document.querySelector('.post-desc-form');
-    fetch('http://thesi.generalassemb.ly:8080/post', {
+    fetch('http://localhost:8181/post', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -252,14 +255,14 @@ function callCreateComment(e) {
     let text = document.querySelector(`[fid="${postNum}"]`);
     console.log('trying to pass ' + text.value);
     // let text = desc[num];
-    fetch(`http://thesi.generalassemb.ly:8080/comment/${postNum}`, {
+    fetch(`http://localhost:8181/comment/${postNum}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             Authorization: 'Bearer ' + token
         },
         body: JSON.stringify({
-            text: text.value
+            description: text.value
         })
     })
         .then(res => {
