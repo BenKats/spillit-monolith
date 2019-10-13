@@ -89,53 +89,54 @@ function callSignup(username, password, email, mobile) {
         });
 }
 
-function callCreateProfile(email, mobile) {
-    console.log(`You're in call create profile, token is ${token}`);
-    console.log('localstorage contains:' + window.localStorage.getItem(token));
-    if (token == null) {
-        console.error('Can not create profile, token is null');
-    }
-    fetch(`http://localhost:8181/profile/${username}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: 'Bearer ' + token
-        },
-        body: JSON.stringify({
-            email: email,
-            mobile: mobile
-        })
-    })
-        .then(res => {
-            console.log(res);
-            return res.json();
-        })
-        .then(res => {
-            console.log('Whats inside?');
-            console.log(res);
-            console.log('You in');
-            redirectHome();
-        })
-        .catch(error => {
-            console.error(error);
-        });
-    console.log(`TOKEN INSIDE CALL SIGNUP IS ${token}`);
-}
+// function callCreateProfile(email, mobile) {
+//     console.log(`You're in call create profile, token is ${token}`);
+//     console.log('localstorage contains:' + window.localStorage.getItem(token));
+//     if (token == null) {
+//         console.error('Can not create profile, token is null');
+//     }
+//     fetch(`http://localhost:8181/profile/${username}`, {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             Authorization: 'Bearer ' + token
+//         },
+//         body: JSON.stringify({
+//             email: email,
+//             mobile: mobile
+//         })
+//     })
+//         .then(res => {
+//             console.log(res);
+//             return res.json();
+//         })
+//         .then(res => {
+//             console.log('Whats inside?');
+//             console.log(res);
+//             console.log('You in');
+//             redirectHome();
+//         })
+//         .catch(error => {
+//             console.error(error);
+//         });
+//     console.log(`TOKEN INSIDE CALL SIGNUP IS ${token}`);
+// }
 
 function returningUser() {
     // e.preventDefault();
-    let email = document.getElementById('email');
+    // let email = document.getElementById('email');
+    let username = document.getElementById('username');
     let password = document.getElementById('password');
-    console.log(email);
+    console.log(username);
     console.log(password);
-    callLogin(email.value, password.value);
+    callLogin(username.value, password.value);
 }
-function callLogin(email, password) {
+function callLogin(username, password) {
     fetch('http://localhost:8181/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            email: email,
+            username: username,
             password: password
         })
     })
