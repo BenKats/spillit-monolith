@@ -10,7 +10,7 @@ callListPosts();
 
 // console.log(postArr);
 function callListPosts() {
-    fetch('http://localhost:8181/list-all', {
+    fetch('http://localhost:8181/post/list-all', {
         method: 'GET'
     }) //Force break
         .then(res => {

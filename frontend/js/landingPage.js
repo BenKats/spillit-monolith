@@ -24,7 +24,6 @@ function toggleEntry(e) {
         bttn.innerText = 'Sign In';
     }
     if (e.target.className === 'signup-text') {
-        // usernameField.style.display = 'block';
         emailField.style.display = 'block';
         mobileField.style.display = 'block';
         // urlField.style.display = 'block';
@@ -61,7 +60,7 @@ function newUser() {
     );
 }
 
-function callSignup(username, password, email) {
+function callSignup(username, password, email, mobile) {
     fetch('http://localhost:8181/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -69,7 +68,8 @@ function callSignup(username, password, email) {
             username: username,
             password: password,
             userProfile: {
-                email: email
+                email: email,
+                mobile: mobile
             }
         })
     })
@@ -81,81 +81,82 @@ function callSignup(username, password, email) {
             console.log('Whats inside signup token?');
             token = res.token;
             console.log(token);
-            callCreateProfile(altEmail, mobile, url);
+            // callCreateProfile(email, mobile);
+            redirectHome();
         })
         .catch(error => {
             console.error(error);
         });
+}
 
-    function callCreateProfile(email, mobile) {
-        console.log(`You're in call create profile, token is ${token}`);
-        console.log('localstorage contains:' + window.localStorage.getItem(token));
-        if (token == null) {
-            console.error('Can not create profile, token is null');
-        }
-        fetch(`http://localhost:8181/profile/${username}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + token
-            },
-            body: JSON.stringify({
-                email: email,
-                mobile: mobile
-            })
+function callCreateProfile(email, mobile) {
+    console.log(`You're in call create profile, token is ${token}`);
+    console.log('localstorage contains:' + window.localStorage.getItem(token));
+    if (token == null) {
+        console.error('Can not create profile, token is null');
+    }
+    fetch(`http://localhost:8181/profile/${username}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + token
+        },
+        body: JSON.stringify({
+            email: email,
+            mobile: mobile
         })
-            .then(res => {
-                console.log(res);
-                return res.json();
-            })
-            .then(res => {
-                console.log('Whats inside?');
-                console.log(res);
-                console.log('You in');
-                redirectHome();
-            })
-            .catch(error => {
-                console.error(error);
-            });
-        console.log(`TOKEN INSIDE CALL SIGNUP IS ${token}`);
-    }
-
-    function returningUser() {
-        // e.preventDefault();
-        let email = document.getElementById('email');
-        let password = document.getElementById('password');
-        console.log(email);
-        console.log(password);
-        callLogin(email.value, password.value);
-    }
-    function callLogin(email, password) {
-        fetch('http://localhost:8181/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                email: email,
-                password: password
-            })
+    })
+        .then(res => {
+            console.log(res);
+            return res.json();
         })
-            .then(res => {
-                return res.json();
-            })
-            .then(res => {
-                console.log(res.token);
-                token = res.token;
-                localStorage.setItem('user', token);
-                redirectHome();
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    }
+        .then(res => {
+            console.log('Whats inside?');
+            console.log(res);
+            console.log('You in');
+            redirectHome();
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    console.log(`TOKEN INSIDE CALL SIGNUP IS ${token}`);
+}
 
-    function redirectHome() {
-        console.log('From redirectHome token: \n' + 'token');
-        if (token != null) {
-            window.localStorage.setItem('token', token);
-            window.location.href = './feed.html';
-        }
+function returningUser() {
+    // e.preventDefault();
+    let email = document.getElementById('email');
+    let password = document.getElementById('password');
+    console.log(email);
+    console.log(password);
+    callLogin(email.value, password.value);
+}
+function callLogin(email, password) {
+    fetch('http://localhost:8181/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            email: email,
+            password: password
+        })
+    })
+        .then(res => {
+            return res.json();
+        })
+        .then(res => {
+            console.log(res.token);
+            token = res.token;
+            localStorage.setItem('user', token);
+            redirectHome();
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
+
+function redirectHome() {
+    console.log('From redirectHome token: \n' + 'token');
+    if (token != null) {
+        window.localStorage.setItem('token', token);
+        window.location.href = './feed.html';
     }
 }
