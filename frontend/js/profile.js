@@ -7,9 +7,10 @@ updateDisplayText();
 function updateProfile(e) {
     e.preventDefault();
 
-    const altEmail = document.getElementById('alt-email');
+    // const altEmail = document.getElementById('alt-email');
+    const email = document.getElementById('email');
     const mobile = document.getElementById('mobile');
-    const url = document.getElementById('url');
+    // const url = document.getElementById('url');
     const bttn = document.getElementById('edit-button');
 
     const allInputs = document.querySelectorAll('.input-form');
@@ -30,7 +31,7 @@ function updateProfile(e) {
             allInputs[i].style.display = 'none';
             allDisplayedText[i].style.display = 'inline';
         }
-        callCreateProfile(altEmail, mobile, url);
+        callCreateProfile(email, mobile);
         bttn.textContent = 'Edit';
     }
     updateDisplayText();
@@ -38,35 +39,39 @@ function updateProfile(e) {
 
 function updateDisplayText() {
     const username = document.getElementById('username');
-    const altEmail = document.getElementById('alt-email');
+    // const altEmail = document.getElementById('alt-email');
+    const email = document.getElementById('email');
     const mobile = document.getElementById('mobile');
-    const url = document.getElementById('url');
+    // const url = document.getElementById('url');
     const usernameDisplayed = document.getElementById('username-displayed');
-    const altEmailDisplayed = document.getElementById('alt-email-displayed');
+    const emailDisplayed = document.getElementById('email-displayed');
     const mobileDisplayed = document.getElementById('mobile-displayed');
     const urlDisplayed = document.getElementById('url-displayed');
 
     callGetProfile(
         username,
-        altEmail,
+        // altEmail,
+        email,
         mobile,
-        url,
+        // url,
         usernameDisplayed,
-        altEmailDisplayed,
-        mobileDisplayed,
-        urlDisplayed
+        // altEmailDisplayed,
+        emailDisplayed,
+        mobileDisplayed
+        // urlDisplayed
     );
 }
 
 function callGetProfile(
     username,
-    altEmail,
+    // altEmail,
+    email,
     mobile,
-    url,
+    // url,
     usernameDisplayed,
-    altEmailDisplayed,
-    mobileDisplayed,
-    urlDisplayed
+    emailDisplayed,
+    mobileDisplayed
+    // urlDisplayed
 ) {
     fetch('http://localhost:8181/profile', {
         method: 'GET',
@@ -84,14 +89,17 @@ function callGetProfile(
             return res.json();
         })
         .then(res => {
+            console.log(res);
             username.value = res.user.username;
-            altEmail.value = res.additionalEmail;
+            // altEmail.value = res.additionalEmail;
+            email.value = res.email;
             mobile.value = res.mobile;
-            url.value = res.address;
+            // url.value = res.address;
             usernameDisplayed.innerText = res.user.username;
-            altEmailDisplayed.innerText = res.additionalEmail;
+            // altEmailDisplayed.innerText = res.additionalEmail;
+            emailDisplayed.innerText = res.email;
             mobileDisplayed.innerText = res.mobile;
-            urlDisplayed.innerText = res.address;
+            // urlDisplayed.innerText = res.address;
             document.querySelector(
                 'img'
             ).src = `https://api.adorable.io/avatars/285/${username.value}.png`;
@@ -107,15 +115,15 @@ function callCreateProfile(email, mobile) {
     if (token == null) {
         console.error('Can not create profile, token is null');
     }
-    fetch('http://localhost:8181/profile/{username}', {
-        method: 'POST',
+    fetch('http://localhost:8181/update', {
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
             Authorization: 'Bearer ' + token
         },
         body: JSON.stringify({
             email: email.value,
-            mobile: mobile.value,
+            mobile: mobile.value
         })
     })
         .then(res => {
