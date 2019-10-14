@@ -21,7 +21,7 @@ Fullstack is a fullstack application with a RESTful api connected to a front end
 
 ## Wireframe
 
-![ERD] (./erd_img/er_diagram.png)
+![ERD](./erd_img/er_diagram.png)
 
 
 ## General Approach 
