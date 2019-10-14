@@ -74,25 +74,6 @@ function displayPosts(postArr) {
         console.log(
             `post id iz ${pid} new title inner text is ${postArr[i].title} newDesc.innerText ${newDesc.innerText} `
         );
-        //Create new elements
-        // let newCommentContainer = document.createElement('div');
-        // let newComment = document.createElement('p');
-        // let newUser = document.createElement('p');
-        // let newDeleteBttn = document.createElement('button');
-        // //Append
-        // targetCommentContainer.appendChild(newCommentContainer);
-        // newCommentContainer.append(newUser, newComment, newDeleteBttn);
-        // //Assign Attributes
-        // newCommentContainer.setAttribute('cid', postComments[j].id);
-        // newCommentContainer.classList.add('comment-container');
-        // //Assign Text
-        // newComment.innerText = postComments[j].description;
-        // newUser.innerText = `Username: ${postComments[j].user.username}`;
-        // newDeleteBttn.innerText = 'Delete';
-
-        // newDeleteBttn.addEventListener('click', deleteComment);
-        // newDeleteBttn.value = postComments[j].id;
-        //check for comments by post id
         callGetCommentsByPostId(pid);
     }
     createNewCommentField();
@@ -224,7 +205,7 @@ function callDeletePost(pid) {
                 alert('You can only delete your own Posts');
             } else if (res.status === 200) {
                 alert(
-                    'You deleted the post succesfully, refresh the page 2-3 times for update to take effect'
+                    'You deleted the post succesfully, refresh the page for update to take effect'
                 );
             }
 
@@ -330,6 +311,9 @@ function callCreateComment(e) {
     })
         .then(res => {
             console.log(res);
+            if (res.status === 200) {
+                alert('Comment Created');
+            }
             return res;
         })
         .catch(error => {

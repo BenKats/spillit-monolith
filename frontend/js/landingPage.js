@@ -66,6 +66,9 @@ function callSignup(username, password, email, mobile) {
             token = res.token;
             console.log(token);
             redirectHome();
+            if (res.status === 226) {
+                alert('Username Taken');
+            }
         })
         .catch(error => {
             console.error(error);

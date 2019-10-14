@@ -3,6 +3,7 @@ package com.project.service;
 import com.project.config.JwtUtil;
 import com.project.model.User;
 import com.project.repository.UserRepository;
+import org.dom4j.IllegalAddException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityExistsException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -61,14 +63,15 @@ public class UserServiceImpl implements UserService {
 //------------------------------|     Endpoints     |----------------------------------------
 
     @Override
-    public String createUser(User newUser){
+    public String createUser(User newUser) throws Exception{
         //Encrypts the passed over password
         newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
-        if(userRepository.save(newUser) != null){
+        if(userRepository.findByUsername(newUser.getUsername()) == null){
+            userRepository.save(newUser);
             UserDetails userDetails = loadUserByUsername(newUser.getUsername());
             return jwtUtil.generateToken(userDetails);
         }
-        return null;
+        throw new Exception();
     }
 
     @Override
