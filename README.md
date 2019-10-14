@@ -8,7 +8,7 @@ Fullstack is a fullstack application with a RESTful api connected to a front end
 * [Benjamin Kats]
 
 
-### Technologies Used
+## Technologies Used
 
 * [Spring] - Used for creating our backend API
 * [PostgreSQL] - Used a SQL language for our relational database which allows us to store and retrieve data.
@@ -18,6 +18,11 @@ Fullstack is a fullstack application with a RESTful api connected to a front end
 [Benjamin Kats]: https://github.com/BenKats
 [Spring]: https://spring.io
 [PostgreSQL]: https://www.postgresql.org/
+
+## Wireframe
+
+![ERD](./erd_img/er_diagram.png)
+
 
 ## General Approach 
 
