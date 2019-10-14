@@ -35,6 +35,7 @@ We first reviewed the technical requirements, necessary deliverables and sketche
 * Connecting the frontend to the backend due to Cross-origin resource sharing(CORS) issue.
 * Testing UserService login functionality
 * Creating the relations between our tables took some time.
+* Testing UserProfileServiveTest
 
 
 ## Installation Instructions
