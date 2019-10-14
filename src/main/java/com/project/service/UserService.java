@@ -12,7 +12,7 @@ public interface UserService  extends UserDetailsService {
     //Might not need to declare getUser method here, might be enough to just define it in the implement
     public User getUser(String username);
 
-    public String createUser(User newUser);
+    public String createUser(User newUser) throws Exception;
 
     public String login(User returningUser, HttpServletRequest request, HttpSession session);
 

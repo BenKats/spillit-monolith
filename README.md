@@ -1,8 +1,6 @@
 # Fullstack
 
-
-
-Fullstack is a fullstack application with a RESTful application connected to a front end all built from scratch.
+Fullstack is a fullstack application with a RESTful api connected to a front end all built from scratch.
 
 ## Collaborators
 
@@ -13,12 +11,13 @@ Fullstack is a fullstack application with a RESTful application connected to a f
 ### Technologies Used
 
 * [Spring] - Used for creating our backend API
-* PostgreSQ - Used for storing and retrieving data from our relational database
+* [PostgreSQL] - Used a SQL language for our relational database which allows us to store and retrieve data.
 * HTML/CSS/Javascript - Used to build the front-end of our application
 
 [Ramel Haines]: https://github.com/EngineerMel
 [Benjamin Kats]: https://github.com/BenKats
 [Spring]: https://spring.io
+[PostgreSQL]: https://www.postgresql.org/
 
 ## General Approach 
 
@@ -33,17 +32,18 @@ We first reviewed the technical requirements, necessary deliverables and sketche
 
 
 ## Major Hurdles
-* Cross-origin resource sharing(CORS)
+* Connecting the frontend to the backend due to Cross-origin resource sharing(CORS) issue.
 * Testing UserService login functionality
+* Creating the relations between our tables took some time.
 
 
 ## Installation Instructions
-* Intellij - An IDE
-* PostgresSQL - used to create your database and tables
-* Tomcat - server used to run the application
-* Postman - An API environment to test your endpoints
-* Maven - a tool to build and manage the dependencies
-* Spring Boot - used bootstrap and maintain Java webapps
+* Intellij - Or any other IDE configured to run Spring apps to launch the local server.
+* PostgresSQL - Needed to create and modify the database on server start.
+* Google Chrome - or other major browser updated to the latest version.
+1. Open the project in Intellij.
+2. Build and Run the ProjectApplication file.
+3. Open the index.html file with Chrome.
 
 
 ## User Stories
