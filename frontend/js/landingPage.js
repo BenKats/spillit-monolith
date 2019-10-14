@@ -10,24 +10,17 @@ function toggleEntry(e) {
     //TODO make the toggle switch classes instead of changing display css rule
     let usernameField = document.getElementById('user-form');
     let emailField = document.getElementById('email-form');
-    // let altEmailField = document.getElementById('altEmail-form');
     let mobileField = document.getElementById('mobile-form');
-    // let urlField = document.getElementById('url-form');
     let bttn = document.getElementById('submit-button');
     if (e.target.className === 'login-text') {
-        // usernameField.style.display = 'none';
         emailField.style.display = 'none';
         mobileField.style.display = 'none';
-        // urlField.style.display = 'none';
-        // altEmailField.style.display = 'none';
         bttn.className = 'signin-bttn';
         bttn.innerText = 'Sign In';
     }
     if (e.target.className === 'signup-text') {
         emailField.style.display = 'block';
         mobileField.style.display = 'block';
-        // urlField.style.display = 'block';
-        // altEmailField.style.display = 'block';
         bttn.className = 'signup-bttn';
         bttn.innerText = 'Sign Up';
     }
@@ -47,17 +40,8 @@ function newUser() {
     let username = document.getElementById('username');
     let password = document.getElementById('password');
     let email = document.getElementById('email');
-    // let altEmail = document.getElementById('alt-email');
     let mobile = document.getElementById('mobile');
-    // let url = document.getElementById('url');
-    callSignup(
-        username.value,
-        password.value,
-        email.value,
-        // altEmail.value,
-        mobile.value
-        // url.value
-    );
+    callSignup(username.value, password.value, email.value, mobile.value);
 }
 
 function callSignup(username, password, email, mobile) {
@@ -81,7 +65,6 @@ function callSignup(username, password, email, mobile) {
             console.log('Whats inside signup token?');
             token = res.token;
             console.log(token);
-            // callCreateProfile(email, mobile);
             redirectHome();
         })
         .catch(error => {
@@ -89,42 +72,8 @@ function callSignup(username, password, email, mobile) {
         });
 }
 
-// function callCreateProfile(email, mobile) {
-//     console.log(`You're in call create profile, token is ${token}`);
-//     console.log('localstorage contains:' + window.localStorage.getItem(token));
-//     if (token == null) {
-//         console.error('Can not create profile, token is null');
-//     }
-//     fetch(`http://localhost:8181/profile/${username}`, {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//             Authorization: 'Bearer ' + token
-//         },
-//         body: JSON.stringify({
-//             email: email,
-//             mobile: mobile
-//         })
-//     })
-//         .then(res => {
-//             console.log(res);
-//             return res.json();
-//         })
-//         .then(res => {
-//             console.log('Whats inside?');
-//             console.log(res);
-//             console.log('You in');
-//             redirectHome();
-//         })
-//         .catch(error => {
-//             console.error(error);
-//         });
-//     console.log(`TOKEN INSIDE CALL SIGNUP IS ${token}`);
-// }
-
 function returningUser() {
     // e.preventDefault();
-    // let email = document.getElementById('email');
     let username = document.getElementById('username');
     let password = document.getElementById('password');
     console.log(username);

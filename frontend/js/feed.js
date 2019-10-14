@@ -160,7 +160,7 @@ function callDeleteComment(cid) {
         .then(res => {
             console.log(res);
             console.log(res.status);
-            if (res.status === 400) {
+            if (res.status === 401) {
                 alert('You can only delete your own comments');
             } else if (res.status === 200) {
                 alert(
@@ -238,6 +238,9 @@ function callCreatePost(e) {
         })
     })
         .then(res => {
+            if (res.status === 200) {
+                alert('New Post Created');
+            }
             return res;
         })
         .catch(error => {

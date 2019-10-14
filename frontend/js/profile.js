@@ -7,10 +7,8 @@ updateDisplayText();
 function updateProfile(e) {
     e.preventDefault();
 
-    // const altEmail = document.getElementById('alt-email');
     const email = document.getElementById('email');
     const mobile = document.getElementById('mobile');
-    // const url = document.getElementById('url');
     const bttn = document.getElementById('edit-button');
 
     const allInputs = document.querySelectorAll('.input-form');
@@ -39,39 +37,23 @@ function updateProfile(e) {
 
 function updateDisplayText() {
     const username = document.getElementById('username');
-    // const altEmail = document.getElementById('alt-email');
     const email = document.getElementById('email');
     const mobile = document.getElementById('mobile');
-    // const url = document.getElementById('url');
     const usernameDisplayed = document.getElementById('username-displayed');
     const emailDisplayed = document.getElementById('email-displayed');
     const mobileDisplayed = document.getElementById('mobile-displayed');
     const urlDisplayed = document.getElementById('url-displayed');
 
-    callGetProfile(
-        username,
-        // altEmail,
-        email,
-        mobile,
-        // url,
-        usernameDisplayed,
-        // altEmailDisplayed,
-        emailDisplayed,
-        mobileDisplayed
-        // urlDisplayed
-    );
+    callGetProfile(username, email, mobile, usernameDisplayed, emailDisplayed, mobileDisplayed);
 }
 
 function callGetProfile(
     username,
-    // altEmail,
     email,
     mobile,
-    // url,
     usernameDisplayed,
     emailDisplayed,
     mobileDisplayed
-    // urlDisplayed
 ) {
     fetch('http://localhost:8181/profile', {
         method: 'GET',
@@ -91,15 +73,11 @@ function callGetProfile(
         .then(res => {
             console.log(res);
             username.value = res.user.username;
-            // altEmail.value = res.additionalEmail;
             email.value = res.email;
             mobile.value = res.mobile;
-            // url.value = res.address;
             usernameDisplayed.innerText = res.user.username;
-            // altEmailDisplayed.innerText = res.additionalEmail;
             emailDisplayed.innerText = res.email;
             mobileDisplayed.innerText = res.mobile;
-            // urlDisplayed.innerText = res.address;
             document.querySelector(
                 'img'
             ).src = `https://api.adorable.io/avatars/285/${username.value}.png`;
