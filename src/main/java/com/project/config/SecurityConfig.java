@@ -37,6 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
 
         http.csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/signup", "/login").permitAll()
                 .antMatchers(HttpMethod.POST).authenticated()
                 .antMatchers(HttpMethod.DELETE).authenticated()
                 .antMatchers(HttpMethod.PUT).authenticated()
@@ -61,6 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
         auth.inMemoryAuthentication().withUser("dba").password(encoder.encode("dba")).roles("DBA");
     }
 
+    //Fixes CORS Origin and CORB errors
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**").allowedOrigins("*").allowedMethods("*").allowedHeaders("*");
