@@ -44,13 +44,14 @@ function displayPosts(postArr) {
         let newTitle = document.createElement('h5');
         let newDesc = document.createElement('h5');
         let newUser = document.createElement('h6');
+        let newDeleteBttn = document.createElement('button');
         let newToggleComments = document.createElement('a');
         newToggleComments.classList.add('toggleComments');
         let pid = postArr[i].id;
 
         feedContainer.appendChild(newPost);
         newPost.append(newTitleContainer, newCommentContainer);
-        newTitleContainer.append(newTitle, newDesc, newUser, newToggleComments);
+        newTitleContainer.append(newTitle, newDesc, newUser, newToggleComments, newDeleteBttn);
 
         //set classes, attributes
         //set the pid of the div to the post id
@@ -66,11 +67,31 @@ function displayPosts(postArr) {
         newTitle.innerText = postArr[i].title;
         newDesc.innerText = postArr[i].description;
         newUser.innerText = `Username: ${postArr[i].user.username}`;
+        newDeleteBttn.innerText = 'Delete';
+        newDeleteBttn.value = pid;
+        newDeleteBttn.addEventListener('click', deletePost);
         newToggleComments.innerText = 'Toggle Comments';
         console.log(
             `post id iz ${pid} new title inner text is ${postArr[i].title} newDesc.innerText ${newDesc.innerText} `
         );
+        //Create new elements
+        // let newCommentContainer = document.createElement('div');
+        // let newComment = document.createElement('p');
+        // let newUser = document.createElement('p');
+        // let newDeleteBttn = document.createElement('button');
+        // //Append
+        // targetCommentContainer.appendChild(newCommentContainer);
+        // newCommentContainer.append(newUser, newComment, newDeleteBttn);
+        // //Assign Attributes
+        // newCommentContainer.setAttribute('cid', postComments[j].id);
+        // newCommentContainer.classList.add('comment-container');
+        // //Assign Text
+        // newComment.innerText = postComments[j].description;
+        // newUser.innerText = `Username: ${postComments[j].user.username}`;
+        // newDeleteBttn.innerText = 'Delete';
 
+        // newDeleteBttn.addEventListener('click', deleteComment);
+        // newDeleteBttn.value = postComments[j].id;
         //check for comments by post id
         callGetCommentsByPostId(pid);
     }
@@ -144,6 +165,11 @@ function deleteComment(e) {
     callDeleteComment(e.target.value);
     console.log(e.target.value);
 }
+function deletePost(e) {
+    e.preventDefault();
+    callDeletePost(e.target.value);
+    console.log(e.target.value);
+}
 
 function callDeleteComment(cid) {
     fetch(`http://localhost:8181/comment/delete/${cid}`, {
@@ -165,6 +191,40 @@ function callDeleteComment(cid) {
             } else if (res.status === 200) {
                 alert(
                     'You deleted the comment succesfully, refresh the page 2-3 times for update to take effect'
+                );
+            }
+
+            // console.log(res.json());
+            return res.json();
+        })
+        .then(res => {
+            console.log(res);
+            return res;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
+function callDeletePost(pid) {
+    fetch(`http://localhost:8181/post/delete/${pid}`, {
+        method: 'DELETE',
+        headers: {
+            Authorization: 'Bearer ' + token
+        }
+    })
+        .then(res => {
+            console.log(res);
+
+            return res;
+        })
+        .then(res => {
+            console.log(res);
+            console.log(res.status);
+            if (res.status === 401) {
+                alert('You can only delete your own Posts');
+            } else if (res.status === 200) {
+                alert(
+                    'You deleted the post succesfully, refresh the page 2-3 times for update to take effect'
                 );
             }
 
