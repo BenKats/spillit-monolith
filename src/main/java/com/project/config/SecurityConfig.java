@@ -4,6 +4,7 @@ import com.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -34,10 +35,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.cors().and()
+        http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/login", "/signup").permitAll()
-                .antMatchers("/user/blah").hasRole("USER")
+                .antMatchers(HttpMethod.POST).authenticated()
+                .antMatchers(HttpMethod.DELETE).authenticated()
+                .antMatchers(HttpMethod.PUT).authenticated()
+//                .antMatchers("/user/blah").hasRole("USER")
                 .anyRequest().permitAll()
                 .and()
                 .httpBasic()
@@ -60,7 +63,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements WebM
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedOrigins("*").allowedMethods("*");
+        registry.addMapping("/**").allowedOrigins("*").allowedMethods("*").allowedHeaders("*");
     }
 
 }

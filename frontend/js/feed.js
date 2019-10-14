@@ -10,7 +10,7 @@ callListPosts();
 
 // console.log(postArr);
 function callListPosts() {
-    fetch('http://localhost:8181/list-all', {
+    fetch('http://localhost:8181/post/list-all', {
         method: 'GET'
     }) //Force break
         .then(res => {
@@ -44,13 +44,14 @@ function displayPosts(postArr) {
         let newTitle = document.createElement('h5');
         let newDesc = document.createElement('h5');
         let newUser = document.createElement('h6');
+        let newDeleteBttn = document.createElement('button');
         let newToggleComments = document.createElement('a');
         newToggleComments.classList.add('toggleComments');
         let pid = postArr[i].id;
 
         feedContainer.appendChild(newPost);
         newPost.append(newTitleContainer, newCommentContainer);
-        newTitleContainer.append(newTitle, newDesc, newUser, newToggleComments);
+        newTitleContainer.append(newTitle, newDesc, newUser, newToggleComments, newDeleteBttn);
 
         //set classes, attributes
         //set the pid of the div to the post id
@@ -66,8 +67,31 @@ function displayPosts(postArr) {
         newTitle.innerText = postArr[i].title;
         newDesc.innerText = postArr[i].description;
         newUser.innerText = `Username: ${postArr[i].user.username}`;
+        newDeleteBttn.innerText = 'Delete';
+        newDeleteBttn.value = pid;
+        newDeleteBttn.addEventListener('click', deletePost);
         newToggleComments.innerText = 'Toggle Comments';
+        console.log(
+            `post id iz ${pid} new title inner text is ${postArr[i].title} newDesc.innerText ${newDesc.innerText} `
+        );
+        //Create new elements
+        // let newCommentContainer = document.createElement('div');
+        // let newComment = document.createElement('p');
+        // let newUser = document.createElement('p');
+        // let newDeleteBttn = document.createElement('button');
+        // //Append
+        // targetCommentContainer.appendChild(newCommentContainer);
+        // newCommentContainer.append(newUser, newComment, newDeleteBttn);
+        // //Assign Attributes
+        // newCommentContainer.setAttribute('cid', postComments[j].id);
+        // newCommentContainer.classList.add('comment-container');
+        // //Assign Text
+        // newComment.innerText = postComments[j].description;
+        // newUser.innerText = `Username: ${postComments[j].user.username}`;
+        // newDeleteBttn.innerText = 'Delete';
 
+        // newDeleteBttn.addEventListener('click', deleteComment);
+        // newDeleteBttn.value = postComments[j].id;
         //check for comments by post id
         callGetCommentsByPostId(pid);
     }
@@ -75,7 +99,7 @@ function displayPosts(postArr) {
 }
 function displayComments(postArr) {
     for (let i = 0; i < postArr.length; i++) {
-        console.log(postArr[i]);
+        console.log('Inside display Comments this is pid' + postArr[i].id);
         let pid = postArr[i].id;
 
         if (sessionStorage.getItem(pid) != null) {
@@ -101,7 +125,7 @@ function displayComments(postArr) {
                 newCommentContainer.setAttribute('cid', postComments[j].id);
                 newCommentContainer.classList.add('comment-container');
                 //Assign Text
-                newComment.innerText = postComments[j].text;
+                newComment.innerText = postComments[j].description;
                 newUser.innerText = `Username: ${postComments[j].user.username}`;
                 newDeleteBttn.innerText = 'Delete';
 
@@ -116,7 +140,7 @@ function callGetCommentsByPostId(pid) {
         method: 'GET'
     })
         .then(res => {
-            // console.log(res.status);
+            console.log(res.status);
             return res.json();
         })
         .then(res => {
@@ -141,6 +165,11 @@ function deleteComment(e) {
     callDeleteComment(e.target.value);
     console.log(e.target.value);
 }
+function deletePost(e) {
+    e.preventDefault();
+    callDeletePost(e.target.value);
+    console.log(e.target.value);
+}
 
 function callDeleteComment(cid) {
     fetch(`http://localhost:8181/comment/delete/${cid}`, {
@@ -157,11 +186,45 @@ function callDeleteComment(cid) {
         .then(res => {
             console.log(res);
             console.log(res.status);
-            if (res.status === 400) {
+            if (res.status === 401) {
                 alert('You can only delete your own comments');
             } else if (res.status === 200) {
                 alert(
                     'You deleted the comment succesfully, refresh the page 2-3 times for update to take effect'
+                );
+            }
+
+            // console.log(res.json());
+            return res.json();
+        })
+        .then(res => {
+            console.log(res);
+            return res;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
+function callDeletePost(pid) {
+    fetch(`http://localhost:8181/post/delete/${pid}`, {
+        method: 'DELETE',
+        headers: {
+            Authorization: 'Bearer ' + token
+        }
+    })
+        .then(res => {
+            console.log(res);
+
+            return res;
+        })
+        .then(res => {
+            console.log(res);
+            console.log(res.status);
+            if (res.status === 401) {
+                alert('You can only delete your own Posts');
+            } else if (res.status === 200) {
+                alert(
+                    'You deleted the post succesfully, refresh the page 2-3 times for update to take effect'
                 );
             }
 
@@ -223,7 +286,7 @@ function callCreatePost(e) {
     console.log(`${document.querySelector('.post-title-form').value}`);
     let title = document.querySelector('.post-title-form');
     let desc = document.querySelector('.post-desc-form');
-    fetch('http://thesi.generalassemb.ly:8080/post', {
+    fetch('http://localhost:8181/post', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -235,6 +298,9 @@ function callCreatePost(e) {
         })
     })
         .then(res => {
+            if (res.status === 200) {
+                alert('New Post Created');
+            }
             return res;
         })
         .catch(error => {
@@ -252,14 +318,14 @@ function callCreateComment(e) {
     let text = document.querySelector(`[fid="${postNum}"]`);
     console.log('trying to pass ' + text.value);
     // let text = desc[num];
-    fetch(`http://thesi.generalassemb.ly:8080/comment/${postNum}`, {
+    fetch(`http://localhost:8181/comment/${postNum}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             Authorization: 'Bearer ' + token
         },
         body: JSON.stringify({
-            text: text.value
+            description: text.value
         })
     })
         .then(res => {
