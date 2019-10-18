@@ -1,6 +1,6 @@
-# Fullstack
+# spillit-monolith
 
-Fullstack is a fullstack application with a RESTful api connected to a front end all built from scratch.
+A fullstack application with a RESTful api connected to a front end all built from scratch.
 
 ## Collaborators
 
